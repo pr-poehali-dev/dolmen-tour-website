@@ -106,7 +106,6 @@ export default function Index() {
               { label: "Справочник гида", id: "guide" },
               { label: "Маршруты", id: "routes" },
               { label: "Галерея", id: "gallery" },
-              { label: "Контакты", id: "contacts" },
             ].map((item) => (
               <button
                 key={item.id}
@@ -138,7 +137,6 @@ export default function Index() {
               { label: "Справочник гида", id: "guide" },
               { label: "Маршруты", id: "routes" },
               { label: "Галерея", id: "gallery" },
-              { label: "Контакты", id: "contacts" },
             ].map((item) => (
               <button
                 key={item.id}
@@ -541,105 +539,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* CONTACTS */}
-      <section id="contacts" className="py-24 md:py-32" style={{ background: "var(--brand-dark)" }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-12" style={{ background: "var(--brand-gold)" }} />
-            <span className="text-xs tracking-[0.4em] uppercase font-body" style={{ color: "var(--brand-gold)" }}>
-              Контакты
-            </span>
-          </div>
-          <h2 className="font-display text-4xl md:text-5xl font-light text-white mb-16">
-            Запишитесь на экскурсию
-          </h2>
 
-          <div className="grid lg:grid-cols-2 gap-16">
-            <div className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-body uppercase tracking-widest mb-2" style={{ color: "rgba(232,229,215,0.5)" }}>
-                    Ваше имя
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Александр"
-                    className="w-full px-4 py-3 font-body text-sm outline-none"
-                    style={{ background: "rgba(64,83,76,0.2)", border: "1px solid rgba(201,168,76,0.2)", borderRadius: "2px", color: "var(--brand-light)" }}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-body uppercase tracking-widest mb-2" style={{ color: "rgba(232,229,215,0.5)" }}>
-                    Телефон
-                  </label>
-                  <input
-                    type="tel"
-                    placeholder="+7 (900) 000-00-00"
-                    className="w-full px-4 py-3 font-body text-sm outline-none"
-                    style={{ background: "rgba(64,83,76,0.2)", border: "1px solid rgba(201,168,76,0.2)", borderRadius: "2px", color: "var(--brand-light)" }}
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-xs font-body uppercase tracking-widest mb-2" style={{ color: "rgba(232,229,215,0.5)" }}>
-                  Выберите маршрут
-                </label>
-                <select
-                  className="w-full px-4 py-3 font-body text-sm outline-none"
-                  style={{ background: "rgba(64,83,76,0.2)", border: "1px solid rgba(201,168,76,0.2)", borderRadius: "2px", color: "var(--brand-light)" }}
-                >
-                  <option value="" style={{ background: "var(--brand-dark)" }}>— Выберите маршрут —</option>
-                  <option style={{ background: "var(--brand-dark)" }}>Маршрут 01: Душа Каменного Леса</option>
-                  <option style={{ background: "var(--brand-dark)" }}>Маршрут 02: Тайна Горного Духа</option>
-                  <option style={{ background: "var(--brand-dark)" }}>Маршрут 03: В Сердце Заповедника</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-body uppercase tracking-widest mb-2" style={{ color: "rgba(232,229,215,0.5)" }}>
-                  Комментарий
-                </label>
-                <textarea
-                  rows={4}
-                  placeholder="Количество человек, пожелания..."
-                  className="w-full px-4 py-3 font-body text-sm outline-none resize-none"
-                  style={{ background: "rgba(64,83,76,0.2)", border: "1px solid rgba(201,168,76,0.2)", borderRadius: "2px", color: "var(--brand-light)" }}
-                />
-              </div>
-              <button
-                className="w-full py-4 font-body font-medium text-base tracking-wide transition-all duration-300 hover:opacity-90"
-                style={{ background: "var(--brand-gold)", color: "var(--brand-dark)", borderRadius: "2px" }}
-              >
-                Отправить заявку
-              </button>
-            </div>
-
-            <div>
-              <h3 className="font-display text-2xl text-white mb-8">Туроператоры партнёры</h3>
-              <div className="space-y-4">
-                {[
-                  { name: "ТЕТИС", desc: "Специализированные экскурсии к дольменам, исторические программы", icon: "Building2" },
-                  { name: "Энек Тур", desc: "Горный туризм, этнографические маршруты Адыгеи", icon: "TreePine" },
-                  { name: "Формула Отдыха", desc: "Комплексные туры: природа, история, активный отдых", icon: "Compass" },
-                ].map((op) => (
-                  <div
-                    key={op.name}
-                    className="flex items-start gap-4 p-5 transition-all duration-200 cursor-pointer hover:-translate-y-0.5"
-                    style={{ background: "rgba(64,83,76,0.15)", border: "1px solid rgba(201,168,76,0.1)", borderRadius: "2px" }}
-                  >
-                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: "rgba(201,168,76,0.1)", color: "var(--brand-gold)" }}>
-                      <Icon name={op.icon} size={18} />
-                    </div>
-                    <div>
-                      <div className="font-display text-lg text-white mb-1">{op.name}</div>
-                      <div className="font-body text-sm" style={{ color: "rgba(232,229,215,0.6)" }}>{op.desc}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* FOOTER */}
       <footer style={{ background: "#0a1515", borderTop: "1px solid rgba(201,168,76,0.1)" }} className="py-12">
