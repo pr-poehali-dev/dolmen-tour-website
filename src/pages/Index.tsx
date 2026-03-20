@@ -176,9 +176,9 @@ export default function Index() {
                 Цивилизационный туризм · Адыгея
               </span>
             </div>
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-white leading-none mb-6">
+            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-none mb-6">
               Душа<br />
-              <em className="font-light" style={{ color: "var(--brand-gold)" }}>Каменного</em><br />
+              <em className="font-bold" style={{ color: "var(--brand-gold)" }}>Каменного</em><br />
               Леса
             </h1>
             <p className="font-body text-lg md:text-xl mb-3 leading-relaxed" style={{ color: "rgba(232,229,215,0.8)" }}>
