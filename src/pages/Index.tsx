@@ -504,7 +504,7 @@ export default function Index() {
               <div
                 key={i}
                 className="relative overflow-hidden group cursor-pointer"
-                style={{ borderRadius: "2px", height: i === 0 ? "520px" : "380px" }}
+                style={{ borderRadius: "2px", height: "420px" }}
               >
                 <img
                   src={item.src}
