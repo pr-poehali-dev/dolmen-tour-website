@@ -50,10 +50,34 @@ const ROUTES = [
 ];
 
 const DOLMEN_TYPES = [
-  { icon: "Square", label: "Плиточные", desc: "Собраны из 5 каменных плит: пол, крыша, 3 стены. Наиболее распространённый тип на Западном Кавказе." },
-  { icon: "Circle", label: "Монолитные", desc: "Высечены целиком в скальном массиве. Редчайший вариант — пример: Волконский монолит." },
-  { icon: "Layers", label: "Составные", desc: "Стены сложены из нескольких блоков. Сложная инженерия без цемента — только точная подгонка." },
-  { icon: "Droplets", label: "Корытообразные", desc: "Полость выдолблена в монолитном блоке. Верхняя плита — съёмная. Переходный тип." },
+  {
+    icon: "Square",
+    label: "Плиточные",
+    desc: "Наиболее распространённый тип на Западном Кавказе.",
+    fullDesc: "Собраны из пяти тщательно отёсанных каменных плит: пол, крыша и три стены. Передняя плита содержит круглое или овальное отверстие-лаз диаметром 30–50 см. Плиты подогнаны без раствора с точностью до миллиметра. Вес отдельных элементов достигает 10–15 тонн. Именно этот тип составляет около 92% всех дольменов Адыгеи.",
+    img: "https://cdn.poehali.dev/files/fcfa465a-3016-4d91-85a6-18205774dbf8.jpg",
+  },
+  {
+    icon: "Circle",
+    label: "Монолитные",
+    desc: "Высечены целиком в скальном массиве. Редчайший вариант.",
+    fullDesc: "Внутренняя камера полностью выдолблена в едином скальном блоке или выходе породы. Крыша и стены составляют единое целое с основанием. Труднейший в исполнении тип — мастера должны были работать в условиях строгих пространственных ограничений. Эталонный пример — Волконский дольмен-монолит у посёлка Лазаревское, датируемый III тысячелетием до н.э.",
+    img: "https://cdn.poehali.dev/files/347de0c8-13b5-4feb-af87-15dc12eb5411.jpg",
+  },
+  {
+    icon: "Layers",
+    label: "Составные",
+    desc: "Стены сложены из нескольких блоков. Сложная инженерия без цемента.",
+    fullDesc: "Стены и кровля формируются из нескольких отдельных каменных блоков, уложенных горизонтально. Конструкция держится исключительно за счёт точной подгонки и силы тяжести — никакого связующего раствора. Такие дольмены встречаются преимущественно в предгорьях. Дольменное поле на реке Жане близ Геленджика — крупнейшее скопление составных дольменов региона.",
+    img: "https://cdn.poehali.dev/files/6934f737-53ef-4a71-8e63-cf194bb4a115.jpg",
+  },
+  {
+    icon: "Droplets",
+    label: "Корытообразные",
+    desc: "Полость выдолблена в монолитном блоке. Верхняя плита — съёмная.",
+    fullDesc: "Переходный тип между плиточным и монолитным. Основание и стены высекаются в едином блоке породы, образуя «корыто», которое накрывается съёмной плоской крышей. Такие сооружения часто имеют более простую форму и меньшие размеры. Встречаются в Майкопском и Лабинском районах Адыгеи, нередко в труднодоступных лесных урочищах.",
+    img: "https://cdn.poehali.dev/files/bbe25a6c-11e8-49fb-bfcd-4445c91dd6da.jpg",
+  },
 ];
 
 const GALLERY = [
@@ -68,6 +92,7 @@ const GALLERY = [
 export default function Index() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [openPanel, setOpenPanel] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -304,55 +329,111 @@ export default function Index() {
             {DOLMEN_TYPES.map((type) => (
               <div
                 key={type.label}
-                className="p-6 transition-all duration-300 hover:-translate-y-1"
+                className="group transition-all duration-500 cursor-default overflow-hidden"
                 style={{ background: "rgba(64,83,76,0.2)", border: "1px solid rgba(201,168,76,0.15)", borderRadius: "2px" }}
               >
-                <div
-                  className="w-10 h-10 flex items-center justify-center mb-4"
-                  style={{ background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.3)" }}
-                >
-                  <Icon name={type.icon} size={20} style={{ color: "var(--brand-gold)" }} />
+                {/* Collapsed state */}
+                <div className="p-6 group-hover:hidden">
+                  <div
+                    className="w-10 h-10 flex items-center justify-center mb-4"
+                    style={{ background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.3)" }}
+                  >
+                    <Icon name={type.icon} size={20} style={{ color: "var(--brand-gold)" }} />
+                  </div>
+                  <h3 className="font-display text-xl text-white mb-3">{type.label}</h3>
+                  <p className="font-body text-sm leading-relaxed" style={{ color: "rgba(232,229,215,0.6)" }}>
+                    {type.desc}
+                  </p>
                 </div>
-                <h3 className="font-display text-xl text-white mb-3">{type.label}</h3>
-                <p className="font-body text-sm leading-relaxed" style={{ color: "rgba(232,229,215,0.6)" }}>
-                  {type.desc}
-                </p>
+                {/* Expanded state on hover */}
+                <div className="hidden group-hover:flex flex-col animate-in fade-in duration-300">
+                  <div className="w-full h-48 overflow-hidden flex-shrink-0">
+                    <img src={type.img} alt={type.label} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div
+                        className="w-8 h-8 flex items-center justify-center flex-shrink-0"
+                        style={{ background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.3)" }}
+                      >
+                        <Icon name={type.icon} size={16} style={{ color: "var(--brand-gold)" }} />
+                      </div>
+                      <h3 className="font-display text-xl text-white">{type.label}</h3>
+                    </div>
+                    <p className="font-body text-sm leading-relaxed" style={{ color: "rgba(232,229,215,0.75)" }}>
+                      {type.fullDesc}
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="p-8" style={{ background: "rgba(64,83,76,0.15)", border: "1px solid rgba(201,168,76,0.1)", borderRadius: "2px" }}>
-              <h3 className="font-display text-2xl text-white mb-4">Ключевые объекты</h3>
-              <ul className="space-y-3">
-                {[
-                  "Волконский дольмен-монолит — уникальный высеченный объект",
-                  "Гузерипльский дольмен — высота 2.5 м, крупнейший в регионе",
-                  "Дольменное поле на реке Жане — составные конструкции",
-                  "Богатырская поляна — более 400 сооружений",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 font-body text-sm" style={{ color: "rgba(232,229,215,0.75)" }}>
-                    <span style={{ color: "var(--brand-gold)", marginTop: "2px" }}>—</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            {/* Ключевые объекты */}
+            <div
+              className="cursor-pointer transition-all duration-300"
+              style={{ background: "rgba(64,83,76,0.15)", border: `1px solid ${openPanel === "objects" ? "rgba(201,168,76,0.4)" : "rgba(201,168,76,0.1)"}`, borderRadius: "2px" }}
+              onClick={() => setOpenPanel(openPanel === "objects" ? null : "objects")}
+            >
+              <div className="p-8 flex items-center justify-between">
+                <h3 className="font-display text-2xl text-white">Ключевые объекты</h3>
+                <Icon name={openPanel === "objects" ? "ChevronUp" : "ChevronDown"} size={20} style={{ color: "var(--brand-gold)", flexShrink: 0 }} />
+              </div>
+              {openPanel === "objects" && (
+                <div className="px-8 pb-8">
+                  <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                    <img src="https://cdn.poehali.dev/files/c4ad992b-0182-4cd8-9396-b603c07d503c.jpg" alt="Гузерипльский дольмен" className="w-full h-40 object-cover" style={{ borderRadius: "2px" }} />
+                    <img src="https://cdn.poehali.dev/files/6934f737-53ef-4a71-8e63-cf194bb4a115.jpg" alt="Богатырская поляна" className="w-full h-40 object-cover" style={{ borderRadius: "2px" }} />
+                  </div>
+                  <ul className="space-y-3">
+                    {[
+                      { title: "Волконский дольмен-монолит", detail: "Единственный монолитный дольмен Краснодарского края, высечен в скальном выходе. Лазаревский район." },
+                      { title: "Гузерипльский дольмен", detail: "Высота 2.5 м, один из крупнейших в регионе. Расположен в Майкопском районе Адыгеи." },
+                      { title: "Дольменное поле на р. Жане", detail: "Более 20 составных дольменов на небольшой площади. Геленджикский район." },
+                      { title: "Богатырская поляна", detail: "Более 400 сооружений — крупнейшее дольменное поле Адыгеи, окрестности Хаджоха." },
+                    ].map((item) => (
+                      <li key={item.title} className="font-body text-sm" style={{ color: "rgba(232,229,215,0.75)" }}>
+                        <span style={{ color: "var(--brand-gold)" }}>— </span>
+                        <span className="font-medium text-white">{item.title}:</span> {item.detail}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
-            <div className="p-8" style={{ background: "rgba(64,83,76,0.15)", border: "1px solid rgba(201,168,76,0.1)", borderRadius: "2px" }}>
-              <h3 className="font-display text-2xl text-white mb-4">Исторический контекст</h3>
-              <ul className="space-y-3">
-                {[
-                  "Майкопская культура — строители мегалитов",
-                  "Связь с Великим шёлковым путём",
-                  "Майкопский курган — эталонный памятник эпохи",
-                  "Программа охраны памятников 1999 г.",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 font-body text-sm" style={{ color: "rgba(232,229,215,0.75)" }}>
-                    <span style={{ color: "var(--brand-gold)", marginTop: "2px" }}>—</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+
+            {/* Исторический контекст */}
+            <div
+              className="cursor-pointer transition-all duration-300"
+              style={{ background: "rgba(64,83,76,0.15)", border: `1px solid ${openPanel === "history" ? "rgba(201,168,76,0.4)" : "rgba(201,168,76,0.1)"}`, borderRadius: "2px" }}
+              onClick={() => setOpenPanel(openPanel === "history" ? null : "history")}
+            >
+              <div className="p-8 flex items-center justify-between">
+                <h3 className="font-display text-2xl text-white">Исторический контекст</h3>
+                <Icon name={openPanel === "history" ? "ChevronUp" : "ChevronDown"} size={20} style={{ color: "var(--brand-gold)", flexShrink: 0 }} />
+              </div>
+              {openPanel === "history" && (
+                <div className="px-8 pb-8">
+                  <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                    <img src="https://cdn.poehali.dev/files/bbe25a6c-11e8-49fb-bfcd-4445c91dd6da.jpg" alt="Майкопская культура" className="w-full h-40 object-cover" style={{ borderRadius: "2px" }} />
+                    <img src="https://cdn.poehali.dev/files/fcfa465a-3016-4d91-85a6-18205774dbf8.jpg" alt="Дольмен" className="w-full h-40 object-cover" style={{ borderRadius: "2px" }} />
+                  </div>
+                  <ul className="space-y-3">
+                    {[
+                      { title: "Майкопская культура", detail: "III тысячелетие до н.э. — создатели большинства дольменов Западного Кавказа. Высокий уровень металлообработки и строительства." },
+                      { title: "Связь с торговыми путями", detail: "Дольмены расположены вдоль древних перевальных троп, служивших прообразом Шёлкового пути." },
+                      { title: "Майкопский курган", detail: "Эталонный памятник эпохи ранней бронзы, раскопан в 1897 г. Хранится в Эрмитаже." },
+                      { title: "Программа охраны 1999 г.", detail: "Государственная программа сохранения мегалитов. Объекты включены в реестр культурного наследия РФ." },
+                    ].map((item) => (
+                      <li key={item.title} className="font-body text-sm" style={{ color: "rgba(232,229,215,0.75)" }}>
+                        <span style={{ color: "var(--brand-gold)" }}>— </span>
+                        <span className="font-medium text-white">{item.title}:</span> {item.detail}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>
