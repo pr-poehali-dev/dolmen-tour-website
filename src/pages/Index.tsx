@@ -57,9 +57,12 @@ const DOLMEN_TYPES = [
 ];
 
 const GALLERY = [
-  { src: IMG_HERO, caption: "Гузерипльский дольмен, утренний туман" },
-  { src: IMG_PANORAMA, caption: "Дольменное поле, Богатырская поляна" },
-  { src: IMG_PORTAL, caption: "Круглое отверстие-лаз, Хаджох" },
+  { src: "https://cdn.poehali.dev/files/c4ad992b-0182-4cd8-9396-b603c07d503c.jpg", caption: "Дольмен в лесу, Адыгея" },
+  { src: "https://cdn.poehali.dev/files/fcfa465a-3016-4d91-85a6-18205774dbf8.jpg", caption: "Плиточный дольмен, Хаджох" },
+  { src: "https://cdn.poehali.dev/files/bbe25a6c-11e8-49fb-bfcd-4445c91dd6da.jpg", caption: "Дольмен Каменномостский" },
+  { src: "https://cdn.poehali.dev/files/6934f737-53ef-4a71-8e63-cf194bb4a115.jpg", caption: "Составной дольмен в зарослях" },
+  { src: "https://cdn.poehali.dev/files/fd5d5f80-1852-4e98-a482-2b2be7944c5e.jpg", caption: "Монолитный дольмен, горный лес" },
+  { src: "https://cdn.poehali.dev/files/347de0c8-13b5-4feb-af87-15dc12eb5411.jpg", caption: "Дольмен у реки Белой" },
 ];
 
 export default function Index() {
