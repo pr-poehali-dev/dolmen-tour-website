@@ -8,7 +8,7 @@ const IMG_PORTAL = "https://cdn.poehali.dev/projects/8315ab8d-383f-4cb9-bc24-005
 const ROUTES = [
   {
     num: "01",
-    title: "Душа Каменного Леса",
+    title: "Культура дольменов",
     location: "Хаджох (Каменномостский)",
     level: "Начинающий",
     levelIcon: "Leaf",
