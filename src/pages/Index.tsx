@@ -175,9 +175,8 @@ export default function Index() {
               </span>
             </div>
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-none mb-6">
-              Душа<br />
-              <em className="font-bold" style={{ color: "var(--brand-gold)" }}>Каменного</em><br />
-              Леса
+              Культура<br />
+              <em className="font-bold" style={{ color: "var(--brand-gold)" }}>дольменов</em>
             </h1>
             <p className="font-body text-lg md:text-xl mb-3 leading-relaxed" style={{ color: "rgba(232,229,215,0.8)" }}>
               Дольмены Адыгеи
