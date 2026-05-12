@@ -120,6 +120,12 @@ export default function Index() {
               </button>
             ))}
             <button
+              className="text-sm font-body tracking-wide transition-colors duration-200 hover:text-white"
+              style={{ color: "rgba(232,229,215,0.7)" }}
+            >
+              Статьи
+            </button>
+            <button
               onClick={() => scrollTo("routes")}
               className="px-5 py-2 text-sm font-body font-medium tracking-wide transition-all duration-200 hover:opacity-90"
               style={{ background: "var(--brand-gold)", color: "var(--brand-dark)", borderRadius: "2px" }}
@@ -150,6 +156,12 @@ export default function Index() {
                 {item.label}
               </button>
             ))}
+            <button
+              className="text-left text-base font-body py-1"
+              style={{ color: "var(--brand-light)" }}
+            >
+              Статьи
+            </button>
           </div>
         )}
       </header>
