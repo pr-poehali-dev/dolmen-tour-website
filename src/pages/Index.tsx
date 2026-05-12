@@ -80,6 +80,62 @@ const DOLMEN_TYPES = [
   },
 ];
 
+const DOLMEN_ANATOMY = [
+  {
+    id: "plates",
+    icon: "LayoutGrid",
+    label: "Плиты дольмена",
+    desc: "Из каких частей состоит конструкция?",
+    items: [
+      { title: "Портальные плиты", detail: "Передние плиты с входным отверстием. Часто имеют утолщение к середине (цилиндрическая линза) или утоньшение в полумонолитах." },
+      { title: "Фасадные плиты", detail: "Лицевая часть дольмена, которая может быть украшена или иметь архитектурные детали." },
+      { title: "Задние плиты", detail: "Задняя стена камеры, которая вместе с боковыми плитами формирует внутреннее пространство." },
+      { title: "Боковые плиты", detail: "Стены, поддерживающие конструкцию и отделяющие камеру от внешнего пространства. Плиты часто соединяются в паз, что обеспечивает прочность." },
+      { title: "Покрывные (верхние) плиты", detail: "Крыша дольмена, перекрывающая камеру. Иногда их вес превышает вес остальных частей сооружения." },
+    ],
+    img: "https://cdn.poehali.dev/files/bbe25a6c-11e8-49fb-bfcd-4445c91dd6da.jpg",
+  },
+  {
+    id: "entrance",
+    icon: "Circle",
+    label: "Входные отверстия",
+    desc: "Форма, назначение и способ закрытия.",
+    items: [
+      { title: "Круглые", detail: "Наиболее распространённый вариант входного отверстия." },
+      { title: "Овальные", detail: "Чуть менее частый вариант, встречается в разных районах Адыгеи." },
+      { title: "Трапециевидные", detail: "Встречаются реже. Также возможны арочные или подтреугольные формы." },
+      { title: "Каменные пробки (втулки)", detail: "Отверстия закрывались пробками с расширяющейся шляпкой, напоминающей гриб." },
+      { title: "Ложнопортальные дольмены", detail: "Без входного отверстия спереди — оно может располагаться сзади или сбоку." },
+    ],
+    img: "https://cdn.poehali.dev/files/fcfa465a-3016-4d91-85a6-18205774dbf8.jpg",
+  },
+  {
+    id: "chamber",
+    icon: "Box",
+    label: "Камеры",
+    desc: "Внутреннее пространство и его формы.",
+    items: [
+      { title: "Прямоугольные камеры", detail: "Наиболее распространённая форма внутреннего пространства дольмена." },
+      { title: "Трапециевидные камеры", detail: "Встречаются реже. Внутренние поверхности плит часто выравнивались или шлифовались." },
+      { title: "Дополнительные элементы", detail: "В некоторых случаях камеры имеют вырезанные каменные полусферы, выступающие из стен." },
+    ],
+    img: "https://cdn.poehali.dev/files/c4ad992b-0182-4cd8-9396-b603c07d503c.jpg",
+  },
+  {
+    id: "structures",
+    icon: "Landmark",
+    label: "Коридоры, кромлехи, рвы",
+    desc: "Сопутствующие архитектурные элементы.",
+    items: [
+      { title: "Погребальные камеры", detail: "Основное внутреннее пространство с захоронениями. Могут быть простыми или сложными в зависимости от конструкции." },
+      { title: "Коридоры (галереи)", detail: "В некоторых дольменах к камере вела входная галерея из стоящих плит. Иногда дольмен превращался в ряд продольных камер." },
+      { title: "Кромлехи", detail: "Кольцевые каменные ограды вокруг дольменов. Выполняли ритуальную или защитную функцию." },
+      { title: "Рвы", detail: "Рвы вокруг или вблизи дольменов — могли иметь практическое (защита) и символическое значение." },
+    ],
+    img: "https://cdn.poehali.dev/files/6934f737-53ef-4a71-8e63-cf194bb4a115.jpg",
+  },
+];
+
 const GALLERY = [
   { src: "https://cdn.poehali.dev/files/c4ad992b-0182-4cd8-9396-b603c07d503c.jpg", caption: "Гузерипльское дольменное поле, пос. Гузерипль, Майкопский район" },
   { src: "https://cdn.poehali.dev/files/fcfa465a-3016-4d91-85a6-18205774dbf8.jpg", caption: "Дольмен у посёлка Хаджох (Каменномостский), р. Белая" },
@@ -93,6 +149,7 @@ export default function Index() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [openPanel, setOpenPanel] = useState<string | null>(null);
+  const [openAnatomy, setOpenAnatomy] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -367,6 +424,53 @@ export default function Index() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* ANATOMY SECTION */}
+          <div className="mb-12 mt-4">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="h-px w-12" style={{ background: "var(--brand-gold)" }} />
+              <span className="text-xs tracking-[0.4em] uppercase font-body" style={{ color: "var(--brand-gold)" }}>
+                Анатомия сооружений
+              </span>
+            </div>
+            <p className="font-body text-base mb-8" style={{ color: "rgba(232,229,215,0.6)" }}>
+              Как мы можем определить, что перед нами дольмен?
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              {DOLMEN_ANATOMY.map((item) => (
+                <div
+                  key={item.id}
+                  className="cursor-pointer transition-all duration-300"
+                  style={{ background: "rgba(64,83,76,0.15)", border: `1px solid ${openAnatomy === item.id ? "rgba(201,168,76,0.4)" : "rgba(201,168,76,0.1)"}`, borderRadius: "2px" }}
+                  onClick={() => setOpenAnatomy(openAnatomy === item.id ? null : item.id)}
+                >
+                  <div className="p-6 flex items-center gap-4">
+                    <div className="w-9 h-9 flex items-center justify-center flex-shrink-0" style={{ background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.3)" }}>
+                      <Icon name={item.icon} size={18} style={{ color: "var(--brand-gold)" }} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-display text-lg text-white">{item.label}</div>
+                      <div className="font-body text-xs mt-0.5" style={{ color: "rgba(232,229,215,0.5)" }}>{item.desc}</div>
+                    </div>
+                    <Icon name={openAnatomy === item.id ? "ChevronUp" : "ChevronDown"} size={18} style={{ color: "var(--brand-gold)", flexShrink: 0 }} />
+                  </div>
+                  {openAnatomy === item.id && (
+                    <div className="px-6 pb-6">
+                      <img src={item.img} alt={item.label} className="w-full h-44 object-cover mb-5" style={{ borderRadius: "2px" }} />
+                      <ul className="space-y-3">
+                        {item.items.map((pt) => (
+                          <li key={pt.title} className="font-body text-sm" style={{ color: "rgba(232,229,215,0.75)" }}>
+                            <span style={{ color: "var(--brand-gold)" }}>— </span>
+                            <span className="font-medium text-white">{pt.title}:</span> {pt.detail}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
